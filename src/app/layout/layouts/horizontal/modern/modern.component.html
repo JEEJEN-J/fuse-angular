@@ -26,7 +26,7 @@
     <div class="relative flex flex-0 items-center w-full h-16 sm:h-20 px-4 md:px-6 z-49 shadow dark:shadow-none dark:border-b bg-card dark:bg-transparent print:hidden">
         <ng-container *ngIf="!isScreenSmall">
             <!-- Logo -->
-            <div class="flex items-center mx-2 lg:mr-8">
+            <a class="flex items-center mx-2 lg:mr-8" routerLink="apps/help-center">
                 <div class="hidden lg:flex">
                     <img
                         class="dark:hidden w-24"
@@ -38,7 +38,7 @@
                 <img
                     class="flex lg:hidden w-8"
                     src="assets/images/logo/logo.svg">
-            </div>
+            </a>
             <!-- Horizontal navigation -->
             <fuse-horizontal-navigation
                 class="mr-2"
@@ -61,7 +61,17 @@
             <shortcuts [shortcuts]="data.shortcuts"></shortcuts>
             <messages [messages]="data.messages"></messages>
             <notifications [notifications]="data.notifications"></notifications>
-            <user-menu></user-menu>
+            <user-menu *ngIf="auth"></user-menu>
+            <a>
+                <button routerLinkActive="active" [matMenuTriggerFor]="auth" mat-icon-button class="example-icon"
+                        aria-label="Example icon-button with share icon">
+                    <mat-icon>settings_power</mat-icon>
+                </button>
+            </a>
+            <mat-menu #auth="matMenu" yPosition="below">
+                <button mat-menu-item routerLink="/pages/authentication/sign-in/modern">Login</button>
+                <button mat-menu-item routerLink="/pages/authentication/sign-up/modern-reversed">Register</button>
+            </mat-menu>
         </div>
     </div>
 
